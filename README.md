@@ -16,5 +16,3 @@ Share aquariums with friends
 Voting rooms - share the code with your friends  
 Host can modify voting choices  
 Responses can be public or private  
-
-##### Just making another change for the assignment
