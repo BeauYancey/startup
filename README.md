@@ -16,3 +16,9 @@ Share aquariums with friends
 Voting rooms - share the code with your friends  
 Host can modify voting choices  
 Responses can be public or private  
+
+### Some stuff I found interesting
+* I am a little bit confued about the difference between commiting a change and pushing it
+* The git extension in VS Code makes it really easy to work with git
+* Can anyone modify my code if they clone the repository? Or do they only clone a copy of it to their development environment?
+* The applications of this collaborative repository structure are essentially endless
