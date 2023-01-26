@@ -1,24 +1,9 @@
 # Startup
 CS 260 Startup Application
 
-## Project Ideas
+## Elevator Pitch
 
-### Fish tanks in an aqurium
-Unique fish  
-Unique tanks  
-Decorations  
-Subtle motion (sways and bobs)  
-Emotion  
-Short messages  
-Share aquariums with friends  
+### Fish tanks in an aqurium -- still working on the name
+The application is a simple social media that allows users to create and join private spaces called aquariums. In each aquarium, users maintain a unique fish tank. Users can customize the shape of their tank, the fish, and the decorations in the tank. Users can communicate in the application by sharing a simple status such as `:)`, `at work`, or `zzz` though their fish. Users will also see if another user in the same aquarium is active at the same time.
 
-### Voting application
-Voting rooms - share the code with your friends  
-Host can modify voting choices  
-Responses can be public or private  
-
-### Some stuff I found interesting
-* I am a little bit confued about the difference between commiting a change and pushing it
-* The git extension in VS Code makes it really easy to work with git
-* Can anyone modify my code if they clone the repository? Or do they only clone a copy of it to their development environment?
-* The applications of this collaborative repository structure are essentially endless
+## Sketches
