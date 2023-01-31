@@ -19,3 +19,7 @@ The application is a simple social media that allows users to create and join pr
 ```
 ssh -i [key pair file] ubuntu@3.141.183.154
 ```
+##### My Domain Name:
+```
+byancey.click
+```
