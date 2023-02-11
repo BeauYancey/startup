@@ -1,0 +1,60 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0px;
+}
+
+#top-logo {
+    padding: 0.8em;
+    text-align: center;
+    background-color: grey;
+}
+
+#global-nav-bar {
+    padding-left: 0px;
+    height: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.app-name {
+    color: darkgrey;
+}
+
+.nav-button {
+    border: none;
+    background-color: rgb(211, 211, 211)
+}
+
+.nav-button:hover {
+    background-color: rgb(190, 190, 190);
+}
+
+.nav-button:active {
+    height: 3.8em;
+    width: 34vw;
+}
+
+h3 {
+    padding: .5em;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+}
+
+#summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#summary > p {
+    text-align:center;
+    padding: 0.4em;
+}
+
+.goal {
+    margin-left: 1em;
+    padding: 0.2em;
+}
+
+.hidden-add {
+    display: none;
+}
