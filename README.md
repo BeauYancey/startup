@@ -23,8 +23,38 @@ ssh -i [key pair file] ubuntu@3.141.183.154
 ```
 byancey.click
 ```
+##### Deploy Changes
+```
+./deployWebsite -k [key pair file] -h byancey.click -s [simon/startup]
+```
 
 ## HTML Notes
 + HyperText Markup Language  
 + Some tags don't need an opener and a closer, one tag such as `<br/>` is sufficient
-+ always start with `<!DOCTYPE html>` and `<html lang="en"> ... </html>`
++ Always start with `<!DOCTYPE html>` and `<html lang="en"> ... </html>`
+
+## CSS Notes
++ Elements are styled with `elementname {}`
++ Classes are styled with `.classname {}`
++ Ids are styled with `#idname {}`
++ Pseudo-classes are styled with `selector:pseudo-class {}` such as `a:hover {}` or `.checkbox:checked {}`
++ Animations are created using the following syntax:
+```
+selector {
+  animation: name duration infinite?;
+}
+
+@keyframes name {
+  from {
+    initial conditions;
+  }
+  50% {
+    conditions in the middle;
+    does not need to be 50%;
+    can have more than one of these;
+  }
+  to {
+    final conditions;
+  }
+}
+```
