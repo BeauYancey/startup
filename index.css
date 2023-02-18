@@ -1,12 +1,24 @@
+:root {
+    --primary-color: #483C46;
+    --secondary-color: #AF929D;
+    --tertiary-color: #98C1B0;
+}
+
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0px;
 }
 
+body {
+    margin-bottom:1em;
+}
+
 #top-logo {
+    margin-bottom: 0;
     padding: 0.8em;
     text-align: center;
-    background-color: grey;
+    background-color: var(--primary-color);
+    color: var(--secondary-color)
 }
 
 #global-nav-bar {
@@ -17,32 +29,47 @@
 }
 
 .app-name {
-    color: darkgrey;
+    color: white;
 }
 
 .nav-button {
     border: none;
-    background-color: rgb(211, 211, 211)
+    background-color: var(--secondary-color)
 }
 
 .nav-button:hover {
-    background-color: rgb(190, 190, 190);
+    filter: brightness(90%)
 }
 
 .nav-button:active {
-    height: 3.8em;
-    width: 34vw;
+    height: 3em;
+    width: 33.5vw;
 }
 
-h3 {
-    padding: .5em;
-    text-align: center;
-    background-color: rgb(238, 238, 238);
+.accordion {
+    background-color: var(--tertiary-color);
+}
+
+.accordion-button:hover {
+    background-color: var(--tertiary-color);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--tertiary-color);
+    color: rgb(20, 20, 20);
+    box-shadow: 0 0 0.25rem #88AD9E;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0.25rem #88AD9E;
+    border-color: #88AD9E;
+    z-index: 3;
 }
 
 #summary {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
 }
 
 #summary > p {
