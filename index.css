@@ -47,6 +47,15 @@ body {
 }
 
 .accordion {
+    --bs-accordion-active-bg: var(--tertiary-color);
+    --bs-accordion-inner-border-radius: 0;
+}
+
+.accordion-item {
+    border: 0;
+}
+
+.accordion-button {
     background-color: var(--tertiary-color);
 }
 
@@ -55,7 +64,6 @@ body {
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: var(--tertiary-color);
     color: rgb(20, 20, 20);
     box-shadow: 0 0 0.25rem #88AD9E;
 }
@@ -69,19 +77,18 @@ body {
 #summary {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+    justify-items: center;
 }
 
 #summary > p {
     text-align:center;
-    padding: 0.4em;
+}
+
+#summary > .goal-type {
+    font-weight: bold;
 }
 
 .goal {
     margin-left: 1em;
     padding: 0.2em;
-}
-
-.hidden-add {
-    display: none;
 }
