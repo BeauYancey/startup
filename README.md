@@ -3,8 +3,8 @@ CS 260 Startup Application
 
 ## Elevator Pitch
 
-### Fish tanks in an aqurium -- still working on the name
-The application is a simple social media that allows users to create and join private spaces called aquariums. In each aquarium, users maintain a unique fish tank. Users can customize the shape of their tank, the fish, and the decorations in the tank. Users can communicate in the application by sharing a simple status such as `:)`, `at work`, or `zzz` though their fish. Users will also see if another user in the same aquarium is active at the same time.
+### Do More - Startup
+Do More is an web application designed to help you achieve your goals and build habits. The app helps you track your progress and encourages you to follow through on your goals by reporting on your progress. The app reminds you to celebrate your victories by displaying your streak. You can also share your streaks with the friends you connect with on the app.
 
 ## Sketches
 ![startup sketch](images/sketches.png)
