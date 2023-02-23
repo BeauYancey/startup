@@ -1,7 +1,8 @@
 :root {
-    --primary-color: #483C46;
-    --secondary-color: #AF929D;
-    --tertiary-color: #98C1B0;
+    --primary-color: #374d7c;
+    --secondary-color: #fdf289;
+    --tertiary-color: #7bbdae;
+    
 }
 
 * {
@@ -126,4 +127,19 @@ body {
 
 .shared-goals {
     margin-top: 1.5em;
+}
+
+.btn-secondary {
+    background-color: var(--tertiary-color);
+    border: none;
+}
+
+.btn-success {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-warning {
+    background-color: var(--secondary-color);
+    border: none;
 }
