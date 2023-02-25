@@ -1,10 +1,12 @@
-# Startup
-CS 260 Startup Application
-
-## Elevator Pitch
-
-### Do More - Startup
+## [Do More - Startup](startup.byancey.click)
 Do More is an web application designed to help you achieve your goals and build habits. The app helps you track your progress and encourages you to follow through on your goals by reporting on your progress. The app reminds you to celebrate your victories by displaying your streak. You can also share your streaks with the friends you connect with on the app.
+
+### Next Steps
++ Fix arrows on accordion objects
+  + They currently point up upon opening the website, they should point down if the accordino is collapsed
++ Add `@media` tags in CSS
++ Maybe change color scheme???
++ Add user interface with Javascript
 
 ## Important things to remember
 ##### My IP Address:  
@@ -13,15 +15,11 @@ Do More is an web application designed to help you achieve your goals and build 
 ```
 ##### SSH into my server:
 ```
-ssh -i [key pair file] ubuntu@3.141.183.154
-```
-##### My Domain Name:
-```
-byancey.click
+ssh -i [key pair file] ubuntu@byancey.click
 ```
 ##### Deploy Changes
 ```
-./deployWebsite -k [key pair file] -h byancey.click -s [simon/startup]
+./deployFiles -k [key pair file] -h byancey.click -s [simon/startup]
 ```
 
 ## HTML Notes
@@ -54,3 +52,12 @@ selector {
   }
 }
 ```
++ Variables are declared with `--variable-name: value`
++ Valiables are accessed with `var(--variable-name)`
+
+## Bootstrap Framework
++ Pull in css files with a `<link rel="stylesheet" href="____"/>` element
++ Pull in Javascript files with a `<script src="____"></script>` element
++ Most bootstrap styles are contained in classes which can be space separated 
+  + `<button class="btn btn-primary>` inherits style from both classes
++ Bootstrap styles can be overriden by adding styling to their pre-defined classes in your own file
