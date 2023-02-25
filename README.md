@@ -4,6 +4,7 @@ Do More is an web application designed to help you achieve your goals and build 
 ### Next Steps
 + Fix arrows on accordion objects
   + They currently point up upon opening the website, they should point down if the accordino is collapsed
++ Fix button hover colors
 + Add `@media` tags in CSS
 + Maybe change color scheme???
 + Add user interface with Javascript
