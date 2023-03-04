@@ -62,3 +62,36 @@ selector {
 + Most bootstrap styles are contained in classes which can be space separated 
   + `<button class="btn btn-primary>` inherits style from both classes
 + Bootstrap styles can be overriden by adding styling to their pre-defined classes in your own file
+
+## Javascript Notes
++ Variables are declared with `let var = val` or `const var = val`
++ Functions are declared with `function name(parameters) { ... }`
++ Anonymous functions can be declared inline with `(parameters) => return val`
+  + Arrow functions `() => return` can reference their creation scope after they pass out of that scope
++ `for (x in iter)` iterates through indices of the iterable
++ `for (x of iter)` iterates through values of the iterable
++ Javascript objects are similar to python dictionaries, they consist of key-value pairs
++ Javascript executes in a single thread
+  + One computation can stop the execution of the entire file if it takes too long.
+  + Promieses are executed asynchronously
+  + `const p = Promise((resolve, reject) => { *when to resolve and when to reject* })`
+  + `p.then( *what to do if it resolves* ).catch( *what to do if it rejects* ).finally( *what to do every time* )`
+  + Promises can also be executed in an `async` function with the `await` keyword
+
+## Manipulating the DOM
++ DOM: Document Object Model
++ Tree structure of the HTML
++ Javascript has access to the DOM with the `document` variable
++ Search the DOM for HTML elements with `document.querySelector(selector)` or `document.querySelectorAll(selector)` or `document.getElementById(id)`
++ Add child elements with `createElement(tag)` then `parentElement.appendChild(newElement)`
++ Change/add elemnt text with `element.textContent = 'new text'`
++ `element.innerHTML = <tag>...</tag>` is discouraged, if adding user input this way, it could change he DOM in unexpected, potnetially malicious ways.
+
+## Notes from Simon
++ In the HTML, adding an `onclick="function()"` to a tag makes it so a function executes when the element is clicked
++ Break the Javascript up into a lot of small functions, test regularly
++ localStorage keeps information about a website cached to the browser
+  + Does not carry across different browsers
++ `window.location.href = "filename.html"` will redirect the user to a new page
+  + probably best to use this with `onclick = "function()"`
++ Javascript needs to loaded at the end of the html file if it is going to manipulate the DOM, otherwise, the header is fine.
