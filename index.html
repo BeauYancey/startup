@@ -61,7 +61,8 @@
           <div class="accordion-collapse collapse collapse" id="daily-collapse">
             <div class="accordion-body">
               <div class="goal-list" id="daily-goals">
-                <div class="goal private">
+                <!-- Uncomment for testing -->
+                <!-- <div class="goal private">
                   <input type="checkbox" />
                   <label>Wake up on time</label>
                   <p class="streak">&#128293; 4 days</p>
@@ -89,11 +90,13 @@
                   <input type="checkbox" />
                   <label>Go to bed on time</label>
                   <p class="streak">&#128293; 7 days</p>
-                </div>
+                </div> -->
               </div>
               <div id="edit-daily" class="goal collapse collapse">
-                <input type="text" placeholder="Add a new goal" />
-                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-daily">Save Changes</button>
+                <input id="new-daily" type="text" placeholder="Add a new goal" />
+                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-daily" onclick="uploadGoal('daily')">
+                  Save Changes
+                </button>
                 <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-daily">Cancel</button>
               </div>
               <div id="edit-daily" class="goal collapse show">
@@ -112,7 +115,8 @@
           <div class="accordion-collapse collapse collapse" id="weekly-collapse">
             <div class="accordion-body">
               <div class="goal-list" id="weekly-goals">
-                <div class="goal public">
+                <!-- Uncomment for testing -->
+                <!-- <div class="goal public">
                   <input type="checkbox" />
                   <label>Go to church</label>
                   <p class="streak">&#128293; 2 weeks</p>
@@ -126,11 +130,13 @@
                   <input type="checkbox" />
                   <label>Review budget</label>
                   <p class="streak">&#128293; 8 weeks</p>
-                </div>
+                </div> -->
               </div>
               <div id="edit-weekly" class="goal collapse">
-                <input type="text" placeholder="Add a new goal" />
-                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-weekly">Save Changes</button>
+                <input id="new-weekly" type="text" placeholder="Add a new goal" />
+                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-weekly" onclick="uploadGoal('weekly')">
+                  Save Changes
+                </button>
                 <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-weekly">Cancel</button>
               </div>
               <div id="edit-weekly" class="goal collapse show">
@@ -151,7 +157,8 @@
           <div class="accordion-collapse collapse collapse" id="monthly-collapse">
             <div class="accordion-body">
               <div class="goal-list" id="monthly-goals">
-                <div class="goal public">
+                <!-- Uncomment for testing -->
+                <!-- <div class="goal public">
                   <input type="checkbox" />
                   <label>Go to the temple</label>
                   <p class="streak">&#128293; 1 month</p>
@@ -165,11 +172,13 @@
                   <input type="checkbox" />
                   <label>Stay within budget</label>
                   <p class="streak">&#128293; 2 months</p>
-                </div>
+                </div> -->
               </div>
               <div id="edit-monthly" class="goal collapse">
-                <input type="text" placeholder="Add a new goal" />
-                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-monthly">Save Changes</button>
+                <input id="new-monthly" type="text" placeholder="Add a new goal" />
+                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-monthly" onclick="uploadGoal('monthly')">
+                  Save Changes
+                </button>
                 <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-monthly">Cancel</button>
               </div>
               <div id="edit-monthly" class="goal collapse show">
