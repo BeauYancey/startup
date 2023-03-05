@@ -6,13 +6,6 @@ function loadGoals() {
     goals = JSON.parse(goalsText);
   }
   
-  // Uncomment the following line for testing
-  // goals = {
-  //   'daily': [['eat', 4, 'private'], ['pray', 6, 'private'], ['sleep', 3, 'public']],
-  //   'weekly': [['church', 6, 'private'], ['temple', 1, 'public']],
-  //   'monthly': [['budget', 2, 'private']]
-  // };
-  
   // LOAD DAILY GOALS
   const dailyListEl = document.querySelector(`#daily-goals`);
   
@@ -107,9 +100,14 @@ loadGoals();
 
 // Do this when a new goal is saved
 function uploadGoal(section) {
+
   const newGoalEl = document.querySelector(`#new-${section}`);
   const newGoal = newGoalEl.value;
   newGoalEl.value = '';
+
+  if (!newGoal) {
+    return
+  }
 
   let goals = {daily: [], weekly: [], monthly: []};
   const goalsText = localStorage.getItem('goals');
@@ -117,6 +115,10 @@ function uploadGoal(section) {
   if (goalsText) {
     goals = JSON.parse(goalsText);
   }
+
+  // FIXME
+  // CURRENTY ASSUMING ALL GOALS ARE PRIVATE
+  // CREATE A WAY FOR USERS TO SPECIFY WHICH THEY WANT
 
   if (section == 'daily') {
     goals.daily.push([newGoal, 0, 'private']);
@@ -149,3 +151,19 @@ function reloadGoals() {
 
   loadGoals();
 }
+
+function clearInput(section) {
+  const newGoalEl = document.querySelector(`#new-${section}`);
+  newGoalEl.value = '';
+}
+
+
+
+
+// localStorage.goals has the following format
+
+//       goals = {
+//         'daily': [[goal, streak, private/bublic], [goal, streak, private/public]],
+//         'weekly': [[goal, streak, private/bublic], [goal, streak, private/public]], 
+//         'monthly': [[goal, streak, private/bublic], [goal, streak, private/public]]
+//       } 

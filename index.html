@@ -61,43 +61,33 @@
           <div class="accordion-collapse collapse collapse" id="daily-collapse">
             <div class="accordion-body">
               <div class="goal-list" id="daily-goals">
-                <!-- Uncomment for testing -->
-                <!-- <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Wake up on time</label>
-                  <p class="streak">&#128293; 4 days</p>
-                </div>
-            
-                <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Brush Teeth</label>
-                  <p class="streak">&#128293; 18 days</p>
-                </div>
-            
-                <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Scripture Study</label>
-                  <p class="streak">&#128293; 8 days</p>
-                </div>
-            
-                <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Work out</label>
-                  <p class="streak">&#128293; 2 days</p>
-                </div>
-            
+                <!-- JavaScript inserts new goals here -->
+
+                <!-- Use the following format to test new goals
+                  
                 <div class="goal private">
                   <input type="checkbox" />
                   <label>Go to bed on time</label>
                   <p class="streak">&#128293; 7 days</p>
-                </div> -->
+                </div>
+
+                -->
               </div>
-              <div id="edit-daily" class="goal collapse collapse">
-                <input id="new-daily" type="text" placeholder="Add a new goal" />
+              <div id="edit-daily" class="goal collapse collapse" style="border-top: solid var(--tertiary-color) 2px;">
+                <!-- <select style="margin-top: 5px;">
+                  <option>Public</option>
+                  <option>Private</option>
+                </select> -->
+                <input id="new-daily" type="text" placeholder="Add a new goal" style="margin-top: 5px"/>
+                <!-- <input id="privacy" type="checkbox">
+                <label>Share with your friends</label> -->
+                <br />
                 <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-daily" onclick="uploadGoal('daily')">
                   Save Changes
                 </button>
-                <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-daily">Cancel</button>
+                <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-daily" onclick="clearInput('daily')">
+                  Cancel
+                </button>
               </div>
               <div id="edit-daily" class="goal collapse show">
                 <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#edit-daily">Edit Goals</button>
@@ -115,29 +105,16 @@
           <div class="accordion-collapse collapse collapse" id="weekly-collapse">
             <div class="accordion-body">
               <div class="goal-list" id="weekly-goals">
-                <!-- Uncomment for testing -->
-                <!-- <div class="goal public">
-                  <input type="checkbox" />
-                  <label>Go to church</label>
-                  <p class="streak">&#128293; 2 weeks</p>
-                </div>
-                <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Work on startup project</label>
-                  <p class="streak">&#128293; 4 weeks</p>
-                </div>
-                <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Review budget</label>
-                  <p class="streak">&#128293; 8 weeks</p>
-                </div> -->
+                <!-- JavaScript inserts new goals here -->
               </div>
               <div id="edit-weekly" class="goal collapse">
                 <input id="new-weekly" type="text" placeholder="Add a new goal" />
                 <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-weekly" onclick="uploadGoal('weekly')">
                   Save Changes
                 </button>
-                <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-weekly">Cancel</button>
+                <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-weekly" onclick="clearInput('weekly')">
+                  Cancel
+                </button>
               </div>
               <div id="edit-weekly" class="goal collapse show">
                 <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#edit-weekly">Edit Goals</button>
@@ -157,29 +134,16 @@
           <div class="accordion-collapse collapse collapse" id="monthly-collapse">
             <div class="accordion-body">
               <div class="goal-list" id="monthly-goals">
-                <!-- Uncomment for testing -->
-                <!-- <div class="goal public">
-                  <input type="checkbox" />
-                  <label>Go to the temple</label>
-                  <p class="streak">&#128293; 1 month</p>
-                </div>
-                <div class="goal public">
-                  <input type="checkbox" />
-                  <label>Go on a date</label>
-                  <p class="streak">&#128293; 6 months</p>
-                </div>
-                <div class="goal private">
-                  <input type="checkbox" />
-                  <label>Stay within budget</label>
-                  <p class="streak">&#128293; 2 months</p>
-                </div> -->
+                <!-- JavaScript inserts new goals here -->
               </div>
               <div id="edit-monthly" class="goal collapse">
                 <input id="new-monthly" type="text" placeholder="Add a new goal" />
                 <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#edit-monthly" onclick="uploadGoal('monthly')">
                   Save Changes
                 </button>
-                <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-monthly">Cancel</button>
+                <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit-monthly" onclick="clearInput('monthly')">
+                  Cancel
+                </button>
               </div>
               <div id="edit-monthly" class="goal collapse show">
                 <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#edit-monthly">Edit Goals</button>
