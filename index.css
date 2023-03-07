@@ -154,12 +154,13 @@ select {
 .btn-success {
     background-color: var(--primary-color);
     border: none;
+    --bs-btn-active-bg: #1c356c;
+    --bs-btn-active-border-color: #2b1c356c4681;
 }
 
 .btn-success:hover {
-    background-color: var(--primary-color);
+    background-color: #1c356c;
     border: none;
-    filter: brightness(80%)
 }
 
 .btn-warning {
@@ -168,9 +169,24 @@ select {
 }
 
 .btn-warning:hover {
-    background-color: var(--secondary-color);
+    background-color: #f7e652;
     border: none;
-    filter: brightness(90%)
+
+}
+
+label.btn {
+    height: 30px;
+    padding-top: 1px;
+}
+
+.btn-check:hover+.btn {
+    background-color: var(--tertiary-color);
+    filter: brightness(85%);
+}
+
+.btn-check:checked+.btn {
+    background-color: var(--tertiary-color);
+    filter: brightness(85%);
 }
 
 @media (max-width: 427px) {

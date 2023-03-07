@@ -105,6 +105,10 @@ function uploadGoal(section) {
   const newGoal = newGoalEl.value;
   newGoalEl.value = '';
 
+  const radioEl = document.querySelector(`input[name="${section}-privacy"]:checked`)
+  const privacyVal = radioEl.value;
+  console.log(`Selected privacy value is ${privacyVal}`)
+
   if (!newGoal) {
     return
   }
@@ -155,6 +159,13 @@ function reloadGoals() {
 function clearInput(section) {
   const newGoalEl = document.querySelector(`#new-${section}`);
   newGoalEl.value = '';
+
+  const privacyEls = document.querySelectorAll(`input[name="${section}-privacy"]`)
+  for (el of privacyEls) {
+    if (el.value === 'public') {
+      el.checked = true;
+    }
+  }
 }
 
 
