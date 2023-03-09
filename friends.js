@@ -7,28 +7,28 @@ function loadFriends() {
   }
 
   // Creating an array of friend's goals for testing purposes
-  // friends = {
-  //   'Lee': {
-  //     'daily': [['Work on startup', 3], ['Serve someone', 9]],
-  //     'weekly': [['Be on time to CS260', 9]], 
-  //     'monthly': []
-  //   },
-  //   'Ron': {
-  //     'daily': [['Spanish Study', 8]],
-  //     'weekly': [], 
-  //     'monthly': []
-  //   },
-  //   'Sarah': {
-  //     'daily': [['Wake up on time', 7], ['Go to bed on time', 7]],
-  //     'weekly': [], 
-  //     'monthly': []
-  //   },
-  //   'Alex': {
-  //     'daily': [['Scripture study', 3]],
-  //     'weekly': [], 
-  //     'monthly': [['Go on a date', 3]]
-  //   }
-  // };
+  friends = {
+    'Lee': {
+      'daily': [['Work on startup', 3], ['Serve someone', 9]],
+      'weekly': [['Be on time to CS260', 9]], 
+      'monthly': []
+    },
+    'Ron': {
+      'daily': [['Spanish Study', 8]],
+      'weekly': [], 
+      'monthly': []
+    },
+    'Sarah': {
+      'daily': [['Wake up on time', 7], ['Go to bed on time', 7]],
+      'weekly': [], 
+      'monthly': []
+    },
+    'Alex': {
+      'daily': [['Scripture study', 3]],
+      'weekly': [], 
+      'monthly': [['Go on a date', 3]]
+    }
+  };
 
   const accordionEl = document.querySelector('div.accordion');
 
