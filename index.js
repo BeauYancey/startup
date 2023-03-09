@@ -120,16 +120,12 @@ function uploadGoal(section) {
     goals = JSON.parse(goalsText);
   }
 
-  // FIXME
-  // CURRENTY ASSUMING ALL GOALS ARE PRIVATE
-  // CREATE A WAY FOR USERS TO SPECIFY WHICH THEY WANT
-
   if (section == 'daily') {
-    goals.daily.push([newGoal, 0, 'private']);
+    goals.daily.push([newGoal, 0, privacyVal]);
   } else if (section == 'weekly') {
-    goals.weekly.push([newGoal, 0, 'private']);
+    goals.weekly.push([newGoal, 0, privacyVal]);
   } else if (section == 'monthly') {
-    goals.monthly.push([newGoal, 0, 'private']);
+    goals.monthly.push([newGoal, 0, privacyVal]);
   }
 
   localStorage.setItem('goals', JSON.stringify(goals));
@@ -174,7 +170,7 @@ function clearInput(section) {
 // localStorage.goals has the following format
 
 //       goals = {
-//         'daily': [[goal, streak, private/bublic], [goal, streak, private/public]],
-//         'weekly': [[goal, streak, private/bublic], [goal, streak, private/public]], 
-//         'monthly': [[goal, streak, private/bublic], [goal, streak, private/public]]
+//         'daily': [[goal, streak, private/public], [goal, streak, private/public]],
+//         'weekly': [[goal, streak, private/public], [goal, streak, private/public]], 
+//         'monthly': [[goal, streak, private/public], [goal, streak, private/public]]
 //       } 

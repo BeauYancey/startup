@@ -15,6 +15,7 @@ body {
 }
 
 input {
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
@@ -138,6 +139,21 @@ select {
 
 .shared-goals {
     margin-top: 1.5em;
+}
+
+#friend-search {
+    padding: 12px 20px 12px 20px;
+}
+
+#friend-search label {
+    font-size: 1.75 rem;
+}
+
+
+
+.btn {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .btn-secondary {

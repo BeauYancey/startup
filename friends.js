@@ -1,0 +1,128 @@
+function loadFriends() {
+  let friends = {};
+  const friendsText = localStorage.getItem('friends');
+  
+  if (friendsText) {
+    friends = JOSN.parse(friendsText);
+  }
+
+  // Creating an array of friend's goals for testing purposes
+  // friends = {
+  //   'Lee': {
+  //     'daily': [['Work on startup', 3], ['Serve someone', 9]],
+  //     'weekly': [['Be on time to CS260', 9]], 
+  //     'monthly': []
+  //   },
+  //   'Ron': {
+  //     'daily': [['Spanish Study', 8]],
+  //     'weekly': [], 
+  //     'monthly': []
+  //   },
+  //   'Sarah': {
+  //     'daily': [['Wake up on time', 7], ['Go to bed on time', 7]],
+  //     'weekly': [], 
+  //     'monthly': []
+  //   },
+  //   'Alex': {
+  //     'daily': [['Scripture study', 3]],
+  //     'weekly': [], 
+  //     'monthly': [['Go on a date', 3]]
+  //   }
+  // };
+
+  const accordionEl = document.querySelector('div.accordion');
+
+  console.log(`friends.length is ${Object.keys(friends).length}`)
+
+  if (Object.keys(friends).length == 0) {
+    const addFriendsEl = document.createElement('h5');
+    addFriendsEl.textContent = 'Add friends to see their goals here!';
+    addFriendsEl.style.textAlign = 'center';
+    addFriendsEl.style.paddingTop = '20px';
+
+    accordionEl.appendChild(addFriendsEl);
+  }
+
+  for (fr in friends) {
+    // Create an accordion button for each friend
+    const accItem = document.createElement('div');
+    accItem.classList.add('accordion-item');
+
+    const accHead = document.createElement('h3');
+    accHead.classList.add('accordion-header');
+
+    const accBtn = document.createElement('button');
+    accBtn.classList.add('accordion-button');
+    accBtn.type = 'button';
+    accBtn.setAttribute('data-bs-toggle', 'collapse');
+    accBtn.setAttribute('data-bs-target', `#${fr}-collapse`);
+    accBtn.textContent = `${fr}'s Summary`;
+
+    accHead.appendChild(accBtn);
+    accItem.appendChild(accHead);
+    accordionEl.appendChild(accItem);
+
+
+    // Create an accordino dropdown for each friend
+    const accCollapse = document.createElement('div');
+    accCollapse.classList.add('accordion-collapse', 'collapse', 'collapse');
+    accCollapse.setAttribute('id', `${fr}-collapse`)
+
+    const accBody = document.createElement('div');
+    accBody.classList.add('accordion-body');
+
+    const sharedGoals = document.createElement('div');
+    sharedGoals.classList.add('shared-goals');
+
+    for (t in friends[fr]){
+      if (friends[fr][t].length > 0){
+        // t is the time frame -- meaning daily/weekly/monthly
+        // this if statement ignores all time frames without goals
+
+        let pos = 0;
+        while (pos < friends[fr][t].length){
+
+          const goalEl = document.createElement('div');
+          goalEl.classList.add('goal');
+
+          const checkEl = document.createElement('input');
+          checkEl.type = 'checkbox';
+          checkEl.disabled = true;
+          checkEl.style.marginRight = '5px';
+
+          const labelEl = document.createElement('label');
+          labelEl.textContent = friends[fr][t][pos][0];
+
+          let interval = 'days';
+          if (t === 'weekly') {
+            interval = 'weeks';
+          } else if (t === 'monthly') {
+            interval = 'months';
+          }
+
+          const streakEl = document.createElement('p');
+          streakEl.classList.add('streak');
+          streakEl.textContent = `🔥 ${friends[fr][t][pos][1]} ${interval}`;
+
+
+          goalEl.appendChild(checkEl);
+          goalEl.appendChild(labelEl);
+          goalEl.appendChild(streakEl);
+
+          sharedGoals.append(goalEl);
+
+          pos++;
+        }
+      }
+    }
+
+    accBody.appendChild(sharedGoals);
+    accCollapse.appendChild(accBody);
+    accItem.appendChild(accCollapse);
+
+  }
+
+}
+
+// Do this every time the page loads
+loadFriends();
