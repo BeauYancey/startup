@@ -1,3 +1,16 @@
+const today = new Date();
+let day_number = Math.floor((today - (new Date(2023, 0, 0))) / (1000 * 60 * 60 * 24));
+const week_number = Math.floor(day_number / 7);
+const month_number = ((today.getFullYear() - 2023) * 12) + today.getMonth() + 1;
+
+console.log(today.getFullYear())
+console.log(month_number)
+
+function incrementDay() {
+  day_number++;
+}
+
+
 function loadGoals() {
   let goals = {daily: [], weekly: [], monthly: []};
   const goalsText = localStorage.getItem('goals');
@@ -10,16 +23,48 @@ function loadGoals() {
   const dailyListEl = document.querySelector(`#daily-goals`);
   
   if (goals.daily.length) {
-    for (const [goal, streak] of goals.daily) {
+    for (const i in goals.daily) {
+      const [goal] = goals.daily[i];
       const checkboxEl = document.createElement('input');
       const labelEl = document.createElement('label');
       const streakEl = document.createElement('p');
       
       checkboxEl.type = "checkbox";
+      if (goals.daily[i][3] === true) {
+        checkboxEl.checked = true
+      }
+
+      // UPDATE STREAK EACH DAY
+      if (goals.daily[i][4] === day_number - 1) {
+        // If the streak was last updated yesterday
+        if (!checkboxEl.checked) {
+          goals.daily[i][1] = 0;
+        }
+        goals.daily[i][4] = day_number;
+        checkboxEl.checked = false;
+      } else if (goals.daily[i][4] < day_number - 1) {
+        // If the streak was last updated more than 1 day ago, reset to 0
+        goals.daily[i][1] = 0;
+        checkboxEl.checked = false;
+        goals.daily[i][4] = day_number;
+      }
+
       checkboxEl.style.marginRight = "5px";
+      checkboxEl.addEventListener('change', function () {
+        if (this.checked) {
+          goals.daily[i][1]++;
+          goals.daily[i][3] = true;
+          updateJSON(goals);
+        } else {
+          goals.daily[i][1]--;
+          goals.daily[i][3] = false;
+          updateJSON(goals);
+        }
+      });
+
       labelEl.textContent = goal;
       streakEl.classList.add('streak');
-      streakEl.textContent = `🔥 ${streak} days`;
+      streakEl.textContent = `🔥 ${goals.daily[i][1]} days`;
       
       const goalDivEl = document.createElement('div');
       goalDivEl.classList.add('goal');
@@ -38,16 +83,48 @@ function loadGoals() {
   const weeklyListEl = document.querySelector(`#weekly-goals`);
   
   if (goals.weekly.length) {
-    for (const [goal, streak] of goals.weekly) {
+    for (const i in goals.weekly) {
+      const [goal] = goals.weekly[i];
       const checkboxEl = document.createElement('input');
       const labelEl = document.createElement('label');
       const streakEl = document.createElement('p');
       
       checkboxEl.type = "checkbox";
+      if (goals.weekly[i][3] === true) {
+        checkboxEl.checked = true
+      }
+
+      // UPDATE STREAK EACH WEEK
+      if (goals.weekly[i][4] === week_number - 1) {
+        // If the streak was last updated yesterday
+        if (!checkboxEl.checked) {
+          goals.weekly[i][1] = 0;
+        }
+        goals.weekly[i][4] = week_number;
+        checkboxEl.checked = false;
+      } else if (goals.weekly[i][4] < week_number - 1) {
+        // If the streak was last updated more than 1 week ago, reset to 0
+        goals.weekly[i][1] = 0;
+        checkboxEl.checked = false;
+        goals.weekly[i][4] = week_number;
+      }
+
       checkboxEl.style.marginRight = "5px";
+      checkboxEl.addEventListener('change', function () {
+        if (this.checked) {
+          goals.weekly[i][1]++;
+          goals.weekly[i][3] = true;
+          updateJSON(goals);
+        } else {
+          goals.weekly[i][1]--;
+          goals.weekly[i][3] = false;
+          updateJSON(goals);
+        }
+      });
+
       labelEl.textContent = goal;
       streakEl.classList.add('streak');
-      streakEl.textContent = `🔥 ${streak} weeks`;
+      streakEl.textContent = `🔥 ${goals.weekly[i][1]} weeks`;
       
       const goalDivEl = document.createElement('div');
       goalDivEl.classList.add('goal');
@@ -68,16 +145,48 @@ function loadGoals() {
   const monthlyListEl = document.querySelector(`#monthly-goals`);
   
   if (goals.monthly.length) {
-    for (const [goal, streak] of goals.monthly) {
+    for (const i in goals.monthly) {
+      const [goal] = goals.monthly[i];
       const checkboxEl = document.createElement('input');
       const labelEl = document.createElement('label');
       const streakEl = document.createElement('p');
       
       checkboxEl.type = "checkbox";
+      if (goals.monthly[i][3] === true) {
+        checkboxEl.checked = true
+      }
+
+      // UPDATE STREAK EACH MONTH
+      if (goals.monthly[i][4] === month_number - 1) {
+        // If the streak was last updated yesterday
+        if (!checkboxEl.checked) {
+          goals.monthly[i][1] = 0;
+        }
+        goals.monthly[i][4] = month_number;
+        checkboxEl.checked = false;
+      } else if (goals.monthly[i][4] < month_number - 1) {
+        // If the streak was last updated more than 1 day ago, reset to 0
+        goals.monthly[i][1] = 0;
+        checkboxEl.checked = false;
+        goals.monthly[i][4] = month_number;
+      }
+
       checkboxEl.style.marginRight = "5px";
+      checkboxEl.addEventListener('change', function () {
+        if (this.checked) {
+          goals.monthly[i][1]++;
+          goals.monthly[i][3] = true;
+          updateJSON(goals);
+        } else {
+          goals.monthly[i][1]--;
+          goals.monthly[i][3] = false;
+          updateJSON(goals);
+        }
+      });
+
       labelEl.textContent = goal;
       streakEl.classList.add('streak');
-      streakEl.textContent = `🔥 ${streak} months`;
+      streakEl.textContent = `🔥 ${goals.monthly[i][1]} months`;
       
       const goalDivEl = document.createElement('div');
       goalDivEl.classList.add('goal');
@@ -97,6 +206,12 @@ function loadGoals() {
 // Do this everytime the webiste loads
 loadGoals();
 
+
+// Function to update JSON
+function updateJSON(goals) {
+  console.log('Running updateJSON()');
+  localStorage.goals = JSON.stringify(goals);
+}
 
 // Do this when a new goal is saved
 function uploadGoal(section) {
@@ -121,11 +236,11 @@ function uploadGoal(section) {
   }
 
   if (section == 'daily') {
-    goals.daily.push([newGoal, 0, privacyVal]);
+    goals.daily.push([newGoal, 0, privacyVal, false, day_number]);
   } else if (section == 'weekly') {
-    goals.weekly.push([newGoal, 0, privacyVal]);
+    goals.weekly.push([newGoal, 0, privacyVal, false, week_number]);
   } else if (section == 'monthly') {
-    goals.monthly.push([newGoal, 0, privacyVal]);
+    goals.monthly.push([newGoal, 0, privacyVal, false, month_number]);
   }
 
   localStorage.setItem('goals', JSON.stringify(goals));
@@ -170,7 +285,7 @@ function clearInput(section) {
 // localStorage.goals has the following format
 
 //       goals = {
-//         'daily': [[goal, streak, private/public], [goal, streak, private/public]],
-//         'weekly': [[goal, streak, private/public], [goal, streak, private/public]], 
-//         'monthly': [[goal, streak, private/public], [goal, streak, private/public]]
+//         'daily': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed, last updated]],
+//         'weekly': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed. last updated]], 
+//         'monthly': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed, last updated]]
 //       } 
