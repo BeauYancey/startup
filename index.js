@@ -3,20 +3,17 @@ let day_number = Math.floor((today - (new Date(2023, 0, 0))) / (1000 * 60 * 60 *
 const week_number = Math.floor(day_number / 7);
 const month_number = ((today.getFullYear() - 2023) * 12) + today.getMonth() + 1;
 
-console.log(today.getFullYear())
-console.log(month_number)
-
-function incrementDay() {
-  day_number++;
-}
-
 
 function loadGoals() {
-  let goals = {daily: [], weekly: [], monthly: []};
+  let goals = {daily: [], weekly: [], monthly: [], lastSevenDays: [[], [], []]};
   const goalsText = localStorage.getItem('goals');
   
   if (goalsText) {
     goals = JSON.parse(goalsText);
+  }
+
+  if (!goals.lastSevenDays) {
+    goals.lastSevenDays = [[], [], []]
   }
   
   // LOAD DAILY GOALS
@@ -39,14 +36,26 @@ function loadGoals() {
         // If the streak was last updated yesterday
         if (!checkboxEl.checked) {
           goals.daily[i][1] = 0;
+          goals.lastSevenDays[0].push(0);
+        } else {
+          goals.lastSevenDays[0].push(1);
         }
         goals.daily[i][4] = day_number;
         checkboxEl.checked = false;
       } else if (goals.daily[i][4] < day_number - 1) {
         // If the streak was last updated more than 1 day ago, reset to 0
+        let diff = day_number - goals.daily[i][4];
+        while (diff > 0) {
+          goals.lastSevenDays[0].push(0);
+          diff--;
+        }
         goals.daily[i][1] = 0;
         checkboxEl.checked = false;
         goals.daily[i][4] = day_number;
+      }
+
+      while (goals.lastSevenDays[0].length > (7 * goals.daily.length)) {
+        goals.lastSevenDays[0].shift();
       }
 
       checkboxEl.style.marginRight = "5px";
@@ -210,7 +219,7 @@ loadGoals();
 // Function to update JSON
 function updateJSON(goals) {
   console.log('Running updateJSON()');
-  localStorage.goals = JSON.stringify(goals);
+  localStorage.setItem('goals', JSON.stringify(goals));
 }
 
 // Do this when a new goal is saved
@@ -288,4 +297,7 @@ function clearInput(section) {
 //         'daily': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed, last updated]],
 //         'weekly': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed. last updated]], 
 //         'monthly': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed, last updated]]
+//         'lastSevenDays': [[1, 0, 1, 1, 1, 0, 1], [1, 0, 1, 0, 0, 1, 1], [1, 0, 1, 1, 1, 1, 1]]
 //       } 
+
+
