@@ -218,7 +218,6 @@ loadGoals();
 
 // Function to update JSON
 function updateJSON(goals) {
-  console.log('Running updateJSON()');
   localStorage.setItem('goals', JSON.stringify(goals));
 }
 
@@ -231,7 +230,6 @@ function uploadGoal(section) {
 
   const radioEl = document.querySelector(`input[name="${section}-privacy"]:checked`)
   const privacyVal = radioEl.value;
-  console.log(`Selected privacy value is ${privacyVal}`)
 
   if (!newGoal) {
     return

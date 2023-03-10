@@ -122,6 +122,7 @@ function loadFriends() {
 
 }
 
+// Adding event handler to click search button if enter is pressed
 document.querySelector('#friend-search-input')
   .addEventListener('keyup', (event) => {
     event.preventDefault();
@@ -134,24 +135,24 @@ function addSearchConfirm() {
 
   removeSearchConfirm();
 
-  userName = document.querySelector('#friend-search-input').value;
+  const userName = document.querySelector('#friend-search-input').value;
   document.querySelector('#friend-search-input').value = '';
-  parent = document.querySelector('#friend-search');
+  const parent = document.querySelector('#friend-search');
 
-  divEl = document.createElement('div');
+  const divEl = document.createElement('div');
   divEl.setAttribute('id', 'confirmation-div')
 
-  labelEl = document.createElement('label');
+  const labelEl = document.createElement('label');
   labelEl.htmlFor = 'add-confirm';
   labelEl.textContent = `Are you sure you want to add ${userName}?`;
 
-  yesBtn = document.createElement('button');
+  const yesBtn = document.createElement('button');
   yesBtn.classList.add('btn', 'btn-secondary', 'add-confirm');
   yesBtn.style.marginLeft = '10px'
   yesBtn.textContent = 'Yes';
   yesBtn.addEventListener('click', removeSearchConfirm)
 
-  noBtn = document.createElement('button');
+  const noBtn = document.createElement('button');
   noBtn.classList.add('btn', 'btn-warning', 'add-confirm');
   noBtn.style.marginLeft = '5px'
   noBtn.textContent = 'No';
@@ -167,7 +168,7 @@ function addSearchConfirm() {
 
 
 function removeSearchConfirm() {
-  toDelete = document.querySelector('#confirmation-div');
+  const toDelete = document.querySelector('#confirmation-div');
   if (toDelete) {
     toDelete.remove();
   }
