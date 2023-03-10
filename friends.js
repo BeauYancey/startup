@@ -122,6 +122,14 @@ function loadFriends() {
 
 }
 
+document.querySelector('#friend-search-input')
+  .addEventListener('keyup', (event) => {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      document.querySelector('#friend-search-input').parentElement.querySelector('button').click();
+    }
+});
+
 function addSearchConfirm() {
 
   removeSearchConfirm();
