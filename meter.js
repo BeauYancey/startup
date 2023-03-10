@@ -12,6 +12,7 @@ function updateMeters() {
 		goals = JSON.parse(goalsText);
 	}
 
+	// Update Daily meter
 	let dailyVal = 0;
 	if (goals.daily.length) {
 		for (i in goals.daily) {
@@ -21,6 +22,7 @@ function updateMeters() {
 	}
 	dailyMeter.value = dailyVal;
 
+	// Update Weekly meter
 	let weeklyVal = 0;
 	if (goals.weekly.length) {
 		for (i in goals.weekly) {
@@ -30,6 +32,7 @@ function updateMeters() {
 	}
 	weeklyMeter.value = weeklyVal;
 
+	// Update Monthly Meter
 	let monthlyVal = 0;
 	if (goals.monthly.length) {
 		for (i in goals.monthly) {
@@ -38,7 +41,6 @@ function updateMeters() {
 		monthlyVal = monthlyVal / goals.monthly.length
 	}
 	monthlyMeter.value = monthlyVal;
-
 
 }
 
