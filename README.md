@@ -2,12 +2,9 @@
 Do More is an web application designed to help you achieve your goals and build habits. The app helps you track your progress and encourages you to follow through on your goals by reporting on your progress. The app reminds you to celebrate your victories by displaying your streak. You can also share your streaks with the friends you connect with on the app.
 
 ### Next Steps
-+ Fix arrows on accordion objects
-  + They currently point up upon opening the website, they should point down if the accordino is collapsed
-+ Fix button hover colors
-+ Add `@media` tags in CSS
-+ Maybe change color scheme???
-+ Add user interface with Javascript
++ Beta test
++ Add Database
++ Add WebSockets
 
 ## Important things to remember
 ##### My IP Address:  
@@ -95,3 +92,16 @@ selector {
 + `window.location.href = "filename.html"` will redirect the user to a new page
   + probably best to use this with `onclick = "function()"`
 + Javascript needs to loaded at the end of the html file if it is going to manipulate the DOM, otherwise, the header is fine.
+
+## Notes from Startup
++ Javascript is a front-end language
+  + It can't run while the website isn't open.
+  + Updating the streak every day is not as simple as it sounds
++ It's better to write a lot of small functions that reference each other instead og one big complex function
++ There is probably a better way to iterate through the goals object, look into that
++ The friends page needs a database to work
++ After creating a new DOM element:
+  + add classes with `el.classList.add('class-name', 'another-class-name')`
+  + add style with `el.style.propertyName = value`
+  + check a box with `checkboxEl.checked = true`
+  + set other attributes (like id) with `el.setAttribute('attribute', 'value')`
