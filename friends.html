@@ -36,17 +36,10 @@
         <div id="friend-search">
           <label for="friend-search-input"> Add a new friend &nbsp;</label>
           <input id="friend-search-input" type="text" placeholder="Enter a username">
-          <button class="btn btn-secondary" style="padding-top: 3px; padding-bottom: 3px;" data-bs-toggle="collapse" data-bs-target="#add-confirm-div">
+          <button class="btn btn-secondary" style="padding-top: 3px; padding-bottom: 3px;" onclick="addSearchConfirm()">
             Search
           </button>
-
           <br />
-
-          <div class="collapse collapse" id="add-confirm-div">
-            <label for="add-confirm">Are you sure you want to add USER ?</label>
-            <button class="btn btn-secondary add-confirm" data-bs-toggle="collapse" data-bs-target="#add-confirm-div">Yes</button>
-            <button class="btn btn-warning add-confirm" data-bs-toggle="collapse" data-bs-target="#add-confirm-div">No</button>
-          </div>
         </div>
 
         <div class="accordion-item">

@@ -196,13 +196,19 @@ label.btn {
 }
 
 .btn-check:hover+.btn {
+    background-color: #4f9487;
+}
+
+.btn-check:active+.btn {
     background-color: var(--tertiary-color);
-    filter: brightness(85%);
 }
 
 .btn-check:checked+.btn {
-    background-color: var(--tertiary-color);
-    filter: brightness(85%);
+    background-color: #539789;
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 @media (max-width: 427px) {

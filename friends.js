@@ -32,8 +32,6 @@ function loadFriends() {
 
   const accordionEl = document.querySelector('div.accordion');
 
-  console.log(`friends.length is ${Object.keys(friends).length}`)
-
   if (Object.keys(friends).length == 0) {
     const addFriendsEl = document.createElement('h5');
     addFriendsEl.textContent = 'Add friends to see their goals here!';
@@ -122,6 +120,49 @@ function loadFriends() {
 
   }
 
+}
+
+function addSearchConfirm() {
+
+  removeSearchConfirm();
+
+  userName = document.querySelector('#friend-search-input').value;
+  document.querySelector('#friend-search-input').value = '';
+  parent = document.querySelector('#friend-search');
+
+  divEl = document.createElement('div');
+  divEl.setAttribute('id', 'confirmation-div')
+
+  labelEl = document.createElement('label');
+  labelEl.htmlFor = 'add-confirm';
+  labelEl.textContent = `Are you sure you want to add ${userName}?`;
+
+  yesBtn = document.createElement('button');
+  yesBtn.classList.add('btn', 'btn-secondary', 'add-confirm');
+  yesBtn.style.marginLeft = '10px'
+  yesBtn.textContent = 'Yes';
+  yesBtn.addEventListener('click', removeSearchConfirm)
+
+  noBtn = document.createElement('button');
+  noBtn.classList.add('btn', 'btn-warning', 'add-confirm');
+  noBtn.style.marginLeft = '5px'
+  noBtn.textContent = 'No';
+  noBtn.addEventListener('click', removeSearchConfirm)
+
+
+  divEl.appendChild(labelEl);
+  divEl.appendChild(yesBtn);
+  divEl.appendChild(noBtn);
+  parent.appendChild(divEl);
+
+}
+
+
+function removeSearchConfirm() {
+  toDelete = document.querySelector('#confirmation-div');
+  if (toDelete) {
+    toDelete.remove();
+  }
 }
 
 // Do this every time the page loads
