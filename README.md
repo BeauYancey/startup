@@ -92,6 +92,10 @@ selector {
 + `window.location.href = "filename.html"` will redirect the user to a new page
   + probably best to use this with `onclick = "function()"`
 + Javascript needs to loaded at the end of the html file if it is going to manipulate the DOM, otherwise, the header is fine.
++ Node/Express creates a server.
+  + `npm init -y`, then `npm install express`
++ Middleware executes in order, the `next` parameter is required to continue to the next middleware object
+  + Without it, there is an implicit break statement
 
 ## Notes from Startup
 + Javascript is a front-end language
