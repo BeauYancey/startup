@@ -84,6 +84,21 @@ selector {
 + Change/add elemnt text with `element.textContent = 'new text'`
 + `element.innerHTML = <tag>...</tag>` is discouraged, if adding user input this way, it could change he DOM in unexpected, potnetially malicious ways.
 
+## Database Notes
++ Mongo account can have multiple databases
++ Database can have multiple collections
++ Do not include credentials in the code.
+  + Write them as environment vairables and use `process.env.VARIABLENAME` to access them
++ `insertOne(object)` to insert a document to a collection
++ `deleteOne(query-object)` to delete a doccument from a collection -- deletes the first document that matches the query
++ Start with this
+```
+const {MongoClient} = require('mongodb')  
+const client = new MongoClient(url)  
+const database = client.db(database)  
+const collection = database.collection(collection)
+```
+
 ## Notes from Simon
 + In the HTML, adding an `onclick="function()"` to a tag makes it so a function executes when the element is clicked
 + Break the Javascript up into a lot of small functions, test regularly
