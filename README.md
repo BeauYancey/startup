@@ -2,8 +2,8 @@
 Do More is an web application designed to help you achieve your goals and build habits. The app helps you track your progress and encourages you to follow through on your goals by reporting on your progress. The app reminds you to celebrate your victories by displaying your streak. You can also share your streaks with the friends you connect with on the app.
 
 ### Next Steps
-+ Beta test
 + Add Database
++ Add Authentication
 + Add WebSockets
 
 ## Important things to remember
@@ -111,6 +111,11 @@ const collection = database.collection(collection)
   + `npm init -y`, then `npm install express`
 + Middleware executes in order, the `next` parameter is required to continue to the next middleware object
   + Without it, there is an implicit break statement
++ The cookie parser is used to keep people logged in
+  + Each user has an assigned token that is sent back in a cookie
+  + Cookies get deleted when a user logs out
++ Login/account creation functions get and post apis
++ Passwords are hashed before entering them into the databse to protect privacy
 
 ## Notes from Startup
 + Javascript is a front-end language
