@@ -116,6 +116,11 @@ const collection = database.collection(collection)
   + Cookies get deleted when a user logs out
 + Login/account creation functions get and post apis
 + Passwords are hashed before entering them into the databse to protect privacy
++ Websocket is an upgraded http request
+  + goes both ways
++ WebSockets close automatically if they're not active
+  + If we want to keep them alive, we need to do so manually
++ Most websocket code goes in the class, then an object of the class is instntiated in the game class
 
 ## Notes from Startup
 + Javascript is a front-end language
