@@ -289,7 +289,7 @@ function clearInput(section) {
 
 
 
-// localStorage.goals has the following format
+// goals object has the following format
 
 //       goals = {
 //         'daily': [[goal, streak, private/public, completed, last updated], [goal, streak, private/public, completed, last updated]],

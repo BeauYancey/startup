@@ -211,6 +211,29 @@ label.btn {
     transform: scale(0.95);
 }
 
+.login-field {
+    margin-top: 10px;
+}
+
+#quote-block {
+    margin-top: 10px;
+    background-color: var(--tertiary-color);
+    width: 80%;
+}
+
+.quote-body {
+    margin: 10px
+}
+
+.quote-text {
+    text-align: center;
+    font-style: italic;
+}
+
+.quote-author {
+    text-align: right;
+}
+
 @media (max-width: 427px) {
     .nav-link {
         height: 4em;
