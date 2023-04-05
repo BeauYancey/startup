@@ -1,14 +1,14 @@
 const today = new Date();
-let day_number = Math.floor((today - (new Date(2023, 0, 0))) / (1000 * 60 * 60 * 24));
+const day_number = Math.floor((today - (new Date(2023, 0, 0))) / (1000 * 60 * 60 * 24));
 const week_number = Math.floor(day_number / 7);
 const month_number = ((today.getFullYear() - 2023) * 12) + today.getMonth() + 1;
+const self = localStorage.getItem('username');
 
 
-function loadGoals() {
-  const self = localStorage.getItem('username');
-  const goals = fetchGoals(self);
-
-  console.log(goals.body);
+async function loadGoals() {
+  const goalsResponse = await fetch(`/api/${self}/goals`);
+  const goalsObj = await goalsResponse.json();
+  const goals = goalsObj[0];
 
   // let goals = {daily: [], weekly: [], monthly: [], lastSevenDays: [[], [], []]};
   // const goalsText = localStorage.getItem('goals');
@@ -221,19 +221,13 @@ function loadGoals() {
 loadGoals();
 
 
-async function fetchGoals(self) {
-  goals = await fetch(`/api/${self}/goals`);
-  return goals;
-}
-
-
 // Function to update JSON
 function updateJSON(goals) {
   localStorage.setItem('goals', JSON.stringify(goals));
 }
 
 // Do this when a new goal is saved
-function uploadGoal(section) {
+async function uploadGoal(section) {
 
   const newGoalEl = document.querySelector(`#new-${section}`);
   const newGoal = newGoalEl.value;
@@ -253,13 +247,22 @@ function uploadGoal(section) {
     goals = JSON.parse(goalsText);
   }
 
-  if (section == 'daily') {
-    goals.daily.push([newGoal, 0, privacyVal, false, day_number]);
-  } else if (section == 'weekly') {
-    goals.weekly.push([newGoal, 0, privacyVal, false, week_number]);
-  } else if (section == 'monthly') {
-    goals.monthly.push([newGoal, 0, privacyVal, false, month_number]);
+  let counter;
+  if (section === 'daily') {
+    counter = day_number;
+  } else if (section === 'weekly') {
+    counter = week_number;
+  } else if (section === 'monthly') {
+    counter = month_number;
   }
+
+  const newGoalArray = [section, [newGoal, 0, privacyVal, false, counter]]
+
+  await fetch(`/api/${self}/goals`, {
+    method: 'POST',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(newGoalArray)
+  });
 
   localStorage.setItem('goals', JSON.stringify(goals));
 

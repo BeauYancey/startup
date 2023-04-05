@@ -43,6 +43,9 @@ async function createUser(username, password) {
     'lastSevenDays': []
   }
   await goalsCollection.insertOne(goals);
+  for (let i = 0; i < 3; i++) {
+    await goalsCollection.updateOne({username: username}, {$push:{lastSevenDays:[]}})
+  }
 
   const friends = {
     username: username,
@@ -59,21 +62,27 @@ function addFriend(self, newFriend) {
   friendsCollection.updateOne(query, {$push:{friends:newFriend}});
 }
 
-async function getFriends(self) {
+function getFriends(self) {
   const cursor = friendsCollection.find({username: self});
   return cursor.toArray();
 }
 
-function addGoal(self, section, newGoal) {
-  const cursor = goalsCollection.find({username: self});
-  obj = cursor.toArray();
-  goalsSection = obj[section];
-  goalsSection.push(newGoal);
+async function addGoal(self, section, newGoal) {
+  const goalsCursor = await goalsCollection.find({username: self}).toArray()
+  const oldGoals = await goalsCursor[0];
+
+  let newGoals = oldGoals;
+  newGoals[section].push(newGoal);
+  await goalsCollection.deleteOne({username: self});
+  await goalsCollection.insertOne(newGoals);
+
 }
 
 function getGoals(self) {
   const cursor = goalsCollection.find({username: self});
   return cursor.toArray();
 }
+
+
 
 module.exports = {addFriend, getFriends, addGoal, getGoals, getUser, getUserByToken, createUser};

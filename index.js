@@ -80,7 +80,7 @@ secureApiRouter.get('/:user/goals', async (req, res) => {
 
 secureApiRouter.post('/:user/goals', async (req, res) => {
   const newGoal = req.body;
-  DB.addGoal(req.params.user, newGoal);
+  DB.addGoal(req.params.user, newGoal[0], newGoal[1]);
   const goals = await DB.getGoals(req.params.user);
   res.send(goals); 
 })

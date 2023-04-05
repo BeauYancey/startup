@@ -11,42 +11,48 @@ async function loadFriends() {
   const response = await fetch(`/api/${self}/friends`)
   const responseJSON = await response.json();
   const namesOnly = responseJSON[0].friends;
-  console.log(namesOnly);
 
   for (fr of namesOnly) {
     friends[fr] = {'daily': [], 'weekly': [], 'monthly': []};
+
+    const goalsResponse = await fetch(`/api/${fr}/goals`);
+    const goals = await goalsResponse.json();
+
+    console.log(goals);
+
+    
   }
-  console.log(friends);
 
 
   // Creating an array of friend's goals for testing purposes
-  friends = {
-    'Lee': {
-      'daily': [['Work on startup', 3], ['Serve someone', 9]],
-      'weekly': [['Be on time to CS260', 9]], 
-      'monthly': []
-    },
-    'Ron': {
-      'daily': [['Spanish Study', 8]],
-      'weekly': [], 
-      'monthly': []
-    },
-    'Sarah': {
-      'daily': [['Wake up on time', 7], ['Go to bed on time', 7]],
-      'weekly': [], 
-      'monthly': []
-    },
-    'Alex': {
-      'daily': [['Scripture study', 3]],
-      'weekly': [], 
-      'monthly': [['Go on a date', 3]]
-    }
-  };
+  // friends = {
+  //   'Lee': {
+  //     'daily': [['Work on startup', 3], ['Serve someone', 9]],
+  //     'weekly': [['Be on time to CS260', 9]], 
+  //     'monthly': []
+  //   },
+  //   'Ron': {
+  //     'daily': [['Spanish Study', 8]],
+  //     'weekly': [], 
+  //     'monthly': []
+  //   },
+  //   'Sarah': {
+  //     'daily': [['Wake up on time', 7], ['Go to bed on time', 7]],
+  //     'weekly': [], 
+  //     'monthly': []
+  //   },
+  //   'Alex': {
+  //     'daily': [['Scripture study', 3]],
+  //     'weekly': [], 
+  //     'monthly': [['Go on a date', 3]]
+  //   }
+  // };
 
   const accordionEl = document.querySelector('div.accordion');
 
   if (Object.keys(friends).length == 0) {
     const addFriendsEl = document.createElement('h5');
+    addFriendsEl.setAttribute('id', 'no-friends');
     addFriendsEl.textContent = 'Add friends to see their goals here!';
     addFriendsEl.style.textAlign = 'center';
     addFriendsEl.style.paddingTop = '20px';
@@ -181,13 +187,30 @@ function addSearchConfirm() {
 
 async function handleYesClick(newFriend) {
 
-  await fetch(`/api/${self}/friends`, {
-    method: 'POST',
-    headers: {'content-type': 'application/json'},
-    body: JSON.stringify({user: newFriend})
-  });
+  const response = await fetch(`/api/${self}/friends`)
+  const responseJSON = await response.json();
+  const namesOnly = responseJSON[0].friends;
+
+  if (newFriend !== "") {
+    if (!namesOnly.includes(newFriend)) {
+      await fetch(`/api/${self}/friends`, {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({user: newFriend})
+      });
+    } else {
+      console.log('skipping post');
+    } 
+  } else {
+    console.log('empty string is not a valid username');
+  }
 
   removeSearchConfirm();
+  const addFriendsEl = document.querySelector('#no-friends');
+  if (addFriendsEl) {
+    addFriendsEl.remove();
+  }
+  loadFriends();
 }
 
 function removeSearchConfirm() {
