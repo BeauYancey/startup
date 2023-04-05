@@ -62,7 +62,6 @@ secureApiRouter.use(async (req, res, next) => {
 
 
 secureApiRouter.get('/:user/friends', async (req, res) => {
-  console.log(req.params.user)
   const friends = await DB.getFriends(req.params.user);
   res.send(friends);
 });
@@ -73,6 +72,18 @@ secureApiRouter.post('/:user/friends', async (req, res) => {
   const friends = await DB.getFriends(req.params.user);
   res.send(friends);
 });
+
+secureApiRouter.get('/:user/goals', async (req, res) => {
+  const goals = await DB.getGoals(req.params.user);
+  res.send(goals);
+});
+
+secureApiRouter.post('/:user/goals', async (req, res) => {
+  const newGoal = req.body;
+  DB.addGoal(req.params.user, newGoal);
+  const goals = await DB.getGoals(req.params.user);
+  res.send(goals); 
+})
 
 app.use((req, res) => {
   res.sendFile('index.html', {root: 'public'});

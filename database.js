@@ -59,10 +59,9 @@ function addFriend(self, newFriend) {
   friendsCollection.updateOne(query, {$push:{friends:newFriend}});
 }
 
-function getFriends(self) {
+async function getFriends(self) {
   const cursor = friendsCollection.find({username: self});
-  friendsList = cursor.toArray().friends;
-  return friendsList;
+  return cursor.toArray();
 }
 
 function addGoal(self, section, newGoal) {
@@ -74,8 +73,7 @@ function addGoal(self, section, newGoal) {
 
 function getGoals(self) {
   const cursor = goalsCollection.find({username: self});
-  goalsObj = cursor.toArray();
-  return goalsObj; 
+  return cursor.toArray();
 }
 
 module.exports = {addFriend, getFriends, addGoal, getGoals, getUser, getUserByToken, createUser};

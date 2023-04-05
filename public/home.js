@@ -5,16 +5,21 @@ const month_number = ((today.getFullYear() - 2023) * 12) + today.getMonth() + 1;
 
 
 function loadGoals() {
-  let goals = {daily: [], weekly: [], monthly: [], lastSevenDays: [[], [], []]};
-  const goalsText = localStorage.getItem('goals');
-  
-  if (goalsText) {
-    goals = JSON.parse(goalsText);
-  }
+  const self = localStorage.getItem('username');
+  const goals = fetchGoals(self);
 
-  if (!goals.lastSevenDays) {
-    goals.lastSevenDays = [[], [], []]
-  }
+  console.log(goals.body);
+
+  // let goals = {daily: [], weekly: [], monthly: [], lastSevenDays: [[], [], []]};
+  // const goalsText = localStorage.getItem('goals');
+  
+  // if (goalsText) {
+  //   goals = JSON.parse(goalsText);
+  // }
+
+  // if (!goals.lastSevenDays) {
+  //   goals.lastSevenDays = [[], [], []]
+  // }
   
   // LOAD DAILY GOALS
   const dailyListEl = document.querySelector(`#daily-goals`);
@@ -214,6 +219,12 @@ function loadGoals() {
 
 // Do this everytime the webiste loads
 loadGoals();
+
+
+async function fetchGoals(self) {
+  goals = await fetch(`/api/${self}/goals`);
+  return goals;
+}
 
 
 // Function to update JSON

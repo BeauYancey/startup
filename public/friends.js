@@ -1,10 +1,23 @@
-function loadFriends() {
+const self = localStorage.getItem('username');
+
+async function loadFriends() {
   let friends = {};
   const friendsText = localStorage.getItem('friends');
   
   if (friendsText) {
     friends = JOSN.parse(friendsText);
   }
+
+  const response = await fetch(`/api/${self}/friends`)
+  const responseJSON = await response.json();
+  const namesOnly = responseJSON[0].friends;
+  console.log(namesOnly);
+
+  for (fr of namesOnly) {
+    friends[fr] = {'daily': [], 'weekly': [], 'monthly': []};
+  }
+  console.log(friends);
+
 
   // Creating an array of friend's goals for testing purposes
   friends = {
@@ -167,8 +180,8 @@ function addSearchConfirm() {
 }
 
 async function handleYesClick(newFriend) {
-  const self = localStorage.getItem('username');
-  const response = await fetch(`/api/${self}/friends`, {
+
+  await fetch(`/api/${self}/friends`, {
     method: 'POST',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify({user: newFriend})
