@@ -18,15 +18,48 @@
     </header>
 
     <main style="display: flex; flex-direction: column; align-items: center;">
-      <div class="login-field">
-        <label for="login-username">Username</label>
-        <input id="login-username" type="text"/>
+      <div id="login-controls" style="display: display;">
+        <div class="login-field">
+          <label for="login-username">Username</label>
+          <input id="login-username" type="text"/>
+        </div>
+        <div class="login-field">
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password"/>
+        </div>
+        <div>
+          <button class="btn btn-success" id="login-submit" onclick="loginUser()" style="margin-top: 5px;">Login</button>
+          <button class="btn btn-success" id="create-submit" onclick="createUser()" style="margin-top: 5px;">Create</button>
+        </div>
       </div>
-      <div class="login-field">
-        <label for="login-password">Password</label>
-        <input id="login-password" type="password"/>
+
+      <div id="homeControls" style="display: none">
+        <div id="playerName"></div>
+        <button type="button" class="btn btn-primary" onclick="home()">
+          Goals
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="logout()">
+          Logout
+        </button>
       </div>
-      <button class="btn btn-success" id="login-submit" onclick="login()" style="margin-top: 5px;">Login</button>
+
+      <div class="modal fade" id="msgModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-dark">
+            <div class="modal-body">error message here</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="quote-block">
       </div>
     </main>

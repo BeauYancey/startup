@@ -150,7 +150,7 @@ function addSearchConfirm() {
   yesBtn.classList.add('btn', 'btn-secondary', 'add-confirm');
   yesBtn.style.marginLeft = '10px'
   yesBtn.textContent = 'Yes';
-  yesBtn.addEventListener('click', removeSearchConfirm)
+  yesBtn.addEventListener('click', () => handleYesClick(userName))
 
   const noBtn = document.createElement('button');
   noBtn.classList.add('btn', 'btn-warning', 'add-confirm');
@@ -166,6 +166,16 @@ function addSearchConfirm() {
 
 }
 
+async function handleYesClick(newFriend) {
+  const self = localStorage.getItem('username');
+  const response = await fetch(`/api/${self}/friends`, {
+    method: 'POST',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify({user: newFriend})
+  });
+
+  removeSearchConfirm();
+}
 
 function removeSearchConfirm() {
   const toDelete = document.querySelector('#confirmation-div');

@@ -1,4 +1,6 @@
 const {MongoClient} = require('mongodb');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 
 const userName = process.env.MONGOUSER;
 const password = process.env.MONGOPASSWORD;
@@ -13,14 +15,48 @@ const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 const client = new MongoClient(url);
 const friendsCollection = client.db('startup').collection('friends');
 const goalsCollection = client.db('startup').collection('goals');
-const usersCollection = client.db('startup').collection('users');
+const userCollection = client.db('startup').collection('users');
+
+function getUser(username) {
+  return userCollection.findOne({ username: username });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
+async function createUser(username, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    username: username,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  const goals = {
+    username: username,
+    'daily': [],
+    'weekly': [],
+    'monthly': [],
+    'lastSevenDays': []
+  }
+  await goalsCollection.insertOne(goals);
+
+  const friends = {
+    username: username,
+    friends: []
+  }
+  await friendsCollection.insertOne(friends);
+
+  return user;
+}
+
 
 function addFriend(self, newFriend) {
-  const cursor = friendsCollection.find({username: self});
-  obj = cursor.toArray();
-  obj.friends.push(newFriend);
-  friendsCollection.deleteOne({username: self});
-  friendsCollection.insertOne(obj);
+  const query = {username: self};
+  friendsCollection.updateOne(query, {$push:{friends:newFriend}});
 }
 
 function getFriends(self) {
@@ -42,4 +78,4 @@ function getGoals(self) {
   return goalsObj; 
 }
 
-module.exports = {addFriend, getFriends, addGoal, getGoals};
+module.exports = {addFriend, getFriends, addGoal, getGoals, getUser, getUserByToken, createUser};
