@@ -2,9 +2,9 @@
 Do More is an web application designed to help you achieve your goals and build habits. The app helps you track your progress and encourages you to follow through on your goals by reporting on your progress. The app reminds you to celebrate your victories by displaying your streak. You can also share your streaks with the friends you connect with on the app.
 
 ### Next Steps
-+ Add Database
-+ Add Authentication
-+ Add WebSockets
++ Switch over to react
++ Create delete goals functionality
++ Create unfollow functionality
 
 ## Important things to remember
 ##### My IP Address:  
@@ -134,3 +134,5 @@ const collection = database.collection(collection)
   + add style with `el.style.propertyName = value`
   + check a box with `checkboxEl.checked = true`
   + set other attributes (like id) with `el.setAttribute('attribute', 'value')`
++ Objects can be accessed with `object.key` or `object['key']`
++ MongoDB has an updateOne function that updates a document, you don't need to delete it and replace it.
