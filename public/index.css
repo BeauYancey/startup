@@ -234,6 +234,16 @@ label.btn {
     text-align: right;
 }
 
+#only-for-width {
+    flex-direction: row;
+}
+
+@media (max-width: 800px) {
+    #only-for-width {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 427px) {
     .nav-link {
         height: 4em;

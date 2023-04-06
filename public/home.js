@@ -69,6 +69,7 @@ async function loadGoals() {
           goals.daily[i][1]++;
           goals.daily[i][3] = true;
           updateJSON(goals);
+          broadcastEvent(self);
         } else {
           goals.daily[i][1]--;
           goals.daily[i][3] = false;
@@ -129,6 +130,7 @@ async function loadGoals() {
           goals.weekly[i][1]++;
           goals.weekly[i][3] = true;
           updateJSON(goals);
+          broadcastEvent(self);
         } else {
           goals.weekly[i][1]--;
           goals.weekly[i][3] = false;
@@ -191,6 +193,7 @@ async function loadGoals() {
           goals.monthly[i][1]++;
           goals.monthly[i][3] = true;
           updateJSON(goals);
+          broadcastEvent(self);
         } else {
           goals.monthly[i][1]--;
           goals.monthly[i][3] = false;
@@ -298,6 +301,43 @@ function clearInput(section) {
       el.checked = true;
     }
   }
+}
+
+function configureWebSocket() {
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+  socket.onopen = (event) => {
+    displayMsg('Websocket connected');
+  };
+  socket.onclose = (event) => {
+    displayMsg('Websocket disconnected');
+  };
+  socket.onmessage = async (event) => {
+    const msg = JSON.parse(await event.data.text());
+    displayMsg(`${msg.from} completed a goal`);
+  };
+  return socket
+}
+const socket = configureWebSocket();
+
+function displayMsg(msg) {
+  const socketEl = document.querySelector('#websocket-block');
+  if (socketEl.firstElementChild) {
+    socketEl.removeChild(socketEl.firstElementChild);
+  }
+  
+  const labelEl = document.createElement('label');
+  labelEl.style.marginTop = '6px';
+  labelEl.textContent = msg;
+
+  socketEl.appendChild(labelEl);
+}
+
+function broadcastEvent(from) {
+  const event = {
+    from: from,
+  };
+  socket.send(JSON.stringify(event));
 }
 
 
