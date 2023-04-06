@@ -66,14 +66,19 @@ async function loadGoals() {
       checkboxEl.style.marginRight = "5px";
       checkboxEl.addEventListener('change', function () {
         if (this.checked) {
-          goals.daily[i][1]++;
-          goals.daily[i][3] = true;
-          updateJSON(goals);
+          let temp = { ...goals.daily[i]}
+          temp[1]++;
+          temp[3] = true;
+          // FIX ME
+          // goals should probably be something else
+          // should update in database
+          updateGoal('daily', goals.daily[i], temp);
           broadcastEvent(self);
         } else {
-          goals.daily[i][1]--;
-          goals.daily[i][3] = false;
-          updateJSON(goals);
+          let temp = { ...goals.daily[i]}
+          temp[1]--;
+          temp[3] = false;
+          updateGoal('daily', goals.daily[i], temp);
         }
       });
 
@@ -127,14 +132,16 @@ async function loadGoals() {
       checkboxEl.style.marginRight = "5px";
       checkboxEl.addEventListener('change', function () {
         if (this.checked) {
-          goals.weekly[i][1]++;
-          goals.weekly[i][3] = true;
-          updateJSON(goals);
+          let temp = { ...goals.weekly[i]};
+          temp[1]++;
+          temp[3] = true;
+          updateGoal('weekly', goals.weekly[i], temp);
           broadcastEvent(self);
         } else {
-          goals.weekly[i][1]--;
-          goals.weekly[i][3] = false;
-          updateJSON(goals);
+          let temp = { ...goals.weekly[i]}
+          temp[1]--;
+          temp[3] = false;
+          updateGoal('weekly', goals.weekly[i], temp);
         }
       });
 
@@ -190,14 +197,16 @@ async function loadGoals() {
       checkboxEl.style.marginRight = "5px";
       checkboxEl.addEventListener('change', function () {
         if (this.checked) {
-          goals.monthly[i][1]++;
-          goals.monthly[i][3] = true;
-          updateJSON(goals);
+          let temp = { ...goals.monthly[i]};
+          temp[1]++;
+          temp[3] = true;
+          updateGoal('monthly', goals.monthly[i], temp);
           broadcastEvent(self);
         } else {
-          goals.monthly[i][1]--;
-          goals.monthly[i][3] = false;
-          updateJSON(goals);
+          let temp = { ...goals.monthly[i]};
+          temp[1]--;
+          temp[3] = false;
+          updateGoal('monthly', goals.monthly[i], temp);
         }
       });
 
@@ -225,8 +234,12 @@ loadGoals();
 
 
 // Function to update JSON
-function updateJSON(goals) {
-  localStorage.setItem('goals', JSON.stringify(goals));
+async function updateGoal(section, oldGoal, newGoal) {
+  await fetch(`/api/${self}/goals`, {
+    method: 'PUT',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify([section, oldGoal, newGoal])
+  });
 }
 
 // Do this when a new goal is saved
@@ -241,13 +254,6 @@ async function uploadGoal(section) {
 
   if (!newGoal) {
     return
-  }
-
-  let goals = {daily: [], weekly: [], monthly: []};
-  const goalsText = localStorage.getItem('goals');
-  
-  if (goalsText) {
-    goals = JSON.parse(goalsText);
   }
 
   let counter;
@@ -266,8 +272,6 @@ async function uploadGoal(section) {
     headers: {'content-type': 'application/json'},
     body: JSON.stringify(newGoalArray)
   });
-
-  localStorage.setItem('goals', JSON.stringify(goals));
 
   reloadGoals();
 }
@@ -314,7 +318,14 @@ function configureWebSocket() {
   };
   socket.onmessage = async (event) => {
     const msg = JSON.parse(await event.data.text());
-    displayMsg(`${msg.from} completed a goal`);
+
+    const response = await fetch(`/api/${self}/friends`)
+    const responseJSON = await response.json();
+    const friendsNames = responseJSON[0].friends;
+
+    if (friendsNames.includes(msg.from)) {
+      displayMsg(`${msg.from} completed a goal`);
+    }
   };
   return socket
 }

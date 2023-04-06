@@ -84,7 +84,14 @@ secureApiRouter.post('/:user/goals', async (req, res) => {
   DB.addGoal(req.params.user, newGoal[0], newGoal[1]);
   const goals = await DB.getGoals(req.params.user);
   res.send(goals); 
-})
+});
+
+secureApiRouter.put('/:user/goals', async (req, res) => {
+  const goal = req.body;
+  DB.updateGoal(req.params.user, goal[0], goal[1], goal[2]);
+  const goals = await DB.getGoals(req.params.user);
+  res.send(goals); 
+});
 
 app.use((req, res) => {
   res.sendFile('index.html', {root: 'public'});

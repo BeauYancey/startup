@@ -83,6 +83,20 @@ function getGoals(self) {
   return cursor.toArray();
 }
 
+async function updateGoal(self, section, oldGoal, newGoal) {
+  const goalsCursor = await goalsCollection.find({username: self}).toArray()
+  const oldGoals = goalsCursor[0];
+
+  let newGoals = oldGoals;
+  for (goalObj of newGoals[section]) {
+    if (goalObj === oldGoal) {
+      goalObj = newGoal
+    }
+  }
+  await goalsCollection.deleteOne({username: self});
+  await goalsCollection.insertOne(newGoals);
+}
 
 
-module.exports = {addFriend, getFriends, addGoal, getGoals, getUser, getUserByToken, createUser};
+
+module.exports = {addFriend, getFriends, addGoal, getGoals, getUser, getUserByToken, createUser, updateGoal};
