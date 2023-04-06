@@ -2,11 +2,6 @@ const self = localStorage.getItem('username');
 
 async function loadFriends() {
   let friends = {};
-  const friendsText = localStorage.getItem('friends');
-  
-  if (friendsText) {
-    friends = JOSN.parse(friendsText);
-  }
 
   const response = await fetch(`/api/${self}/friends`)
   const responseJSON = await response.json();
@@ -16,13 +11,17 @@ async function loadFriends() {
     friends[fr] = {'daily': [], 'weekly': [], 'monthly': []};
 
     const goalsResponse = await fetch(`/api/${fr}/goals`);
-    const goals = await goalsResponse.json();
+    const goalsJSON = await goalsResponse.json();
+    const goals = goalsJSON[0];
 
-    console.log(goals);
-
-    
+    for (sec of ['daily', 'weekly', 'monthly']) {
+      for (goal of goals[sec]) {
+        if (goal[2] === 'public') {
+          friends[fr][sec].push(goal);
+        }
+      }
+    }
   }
-
 
   // Creating an array of friend's goals for testing purposes
   // friends = {
@@ -198,11 +197,7 @@ async function handleYesClick(newFriend) {
         headers: {'content-type': 'application/json'},
         body: JSON.stringify({user: newFriend})
       });
-    } else {
-      console.log('skipping post');
-    } 
-  } else {
-    console.log('empty string is not a valid username');
+    }
   }
 
   removeSearchConfirm();
