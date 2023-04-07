@@ -121,6 +121,13 @@ const collection = database.collection(collection)
 + WebSockets close automatically if they're not active
   + If we want to keep them alive, we need to do so manually
 + Most websocket code goes in the class, then an object of the class is instntiated in the game class
++ React nearly eliminates html files
+  + Replaced them all with .jsx files that return app components that injected into the DOM
++ Routers change index.html depending on the requested url path
++ 3 folders
+  + One for public files
+  + One for source files
+  + One for service files 
 
 ## Notes from Startup
 + Javascript is a front-end language
